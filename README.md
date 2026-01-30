@@ -7,5 +7,5 @@ Matching app for shelter and potential owners.
 
 
 
-Run in development mode
+## Run in development mode
 npm run dev
