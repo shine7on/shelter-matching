@@ -7,5 +7,6 @@ const app = express();
 app.use(express.json());
 
 app.use("/api/v1/dogs", dogRoute);
+app.use("/", peopleRoute);
 
 export default app;
