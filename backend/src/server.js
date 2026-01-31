@@ -5,14 +5,14 @@ import { PORT } from './config/env.js';
 
 async function start() {
     try {
-        await connectDB(app);
+        await connectDB();
         
         app.listen(PORT, () => {
             console.log(`Server listening on port ${PORT}`);
         });
     } catch (err) {
         console.error("Startup error:", err);
-        process.exit();
+        process.exit(1);
     }
 }
 

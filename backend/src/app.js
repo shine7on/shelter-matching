@@ -1,12 +1,12 @@
 import express from 'express';
-import dogRoute from './routers/dogs.js';
-import peopleRoute from './routers/people.js';
+import dogsRoute from './routers/dogs.js';
+import usersRoute from './routers/users.js';
 
 
 const app = express();
 app.use(express.json());
 
-app.use("/api/v1/dogs", dogRoute);
-app.use("/", peopleRoute);
+app.use("/api/v1/dogs", dogsRoute);
+app.use("/api/v1/users", usersRoute);
 
 export default app;

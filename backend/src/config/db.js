@@ -1,16 +1,10 @@
-import { MongoClient } from 'mongodb';
+import mongoose from 'mongoose';
 import { MONGODB_URI, DB_NAME } from './env.js';
 
-const client = new MongoClient(MONGODB_URI);
-
-
-export async function connectDB(app) {
-    await client.connect();
-    const db = client.db(DB_NAME);
-
-    app.locals.db = db;
-
-    console.log("Connected to MongoDB Atlas");
-
-    return db;
+export async function connectDB() {
+    if (!MONGODB_URI) throw new Error("Missing MONGODB_URI in env");
+    await mongoose.connect(MONGODB_URI, { dbName: DB_NAME });
+    console.log("Mongoose DB:", mongoose.connection.name);
+    console.log("Mongoose Host:", mongoose.connection.host);
+    console.log("MongoDB connected (mongoose)");
 }
