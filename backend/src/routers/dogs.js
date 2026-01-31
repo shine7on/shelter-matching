@@ -40,4 +40,22 @@ router.post("/", async (req, res) => {
     }
 });
 
+// PUT: Update the dog
+router.put("/:id", async (req, res) => {
+    try {
+        const {id} = req.params;
+
+        const dog = await Dog.findByIdAndUpdate(id, req.body);
+
+        if (!dog) 
+            res.status(404).json({Error: "Dog not found"});
+
+        const UpdatedDog = await Dog.findById(id);
+
+        res.status(200).json(UpdatedDog);
+    } catch (error) {
+        res.status(400).json({Error: error.message})
+    }
+});
+
 export default router;
