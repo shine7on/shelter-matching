@@ -55,4 +55,22 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+
+// DELETE
+router.delete("/:id", async (req, res) => {
+  try {
+    const {id} = req.params;
+
+    const user = User.findByIdAndDelete(id);
+
+    if (!user)
+      res.status(404).json({Error: "User not found"});
+
+    res.status(200).json({message: "Delete successfully"});
+
+  } catch (error) {
+    res.status(500).json({message: "Failed to delete"})
+  }
+});
+
 export default router;

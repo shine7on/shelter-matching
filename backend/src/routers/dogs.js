@@ -58,4 +58,20 @@ router.put("/:id", async (req, res) => {
     }
 });
 
+// DELETE: delete the dog
+router.delete("/:id", async (req, res) =>  {
+    try {
+        const {id} = req.params;
+
+        const dog = await Dog.findByIdAndDelete(id);
+
+        if (!dog) 
+            res.status(404).json({Error: "Dog not found"});
+
+        res.status(200).json({message: "Delete successfully"});
+    } catch (error) {
+        res.status(400).json({Error: error.message})
+    }
+});
+
 export default router;

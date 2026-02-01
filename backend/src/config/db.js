@@ -5,6 +5,5 @@ export async function connectDB() {
     if (!MONGODB_URI) throw new Error("Missing MONGODB_URI in env");
     await mongoose.connect(MONGODB_URI, { dbName: DB_NAME });
     console.log("Mongoose DB:", mongoose.connection.name);
-    console.log("Mongoose Host:", mongoose.connection.host);
     console.log("MongoDB connected (mongoose)");
 }
