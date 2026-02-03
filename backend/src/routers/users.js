@@ -1,6 +1,6 @@
 import { Router } from "express";
 import User from "../models/user.model.js";
-import { getUsers, getUserById, addUser, updateUser, deleteUser } from "../controllers/user.controller.js";
+import { getUsers, getUserById, getLikedDogs, addUser, updateUser, deleteUser } from "../controllers/user.controller.js";
 
 const router = Router();
 
@@ -9,6 +9,9 @@ router.get("/", getUsers);
 
 // GET one user
 router.get("/:id", getUserById);
+
+// GET dogs liked by one user
+router.get("/:id/liked-dogs", getLikedDogs);
 
 // POST: Add the new user
 router.post("/", addUser);

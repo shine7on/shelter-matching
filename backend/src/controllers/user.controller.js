@@ -1,4 +1,6 @@
 import User from "../models/user.model.js";
+import Swipe from "../models/swipe.model.js";
+import Dog from "../models/dog.model.js";
 
 export async function getUsers (req, res) {
     try {
@@ -19,6 +21,23 @@ export async function getUserById (req, res) {
         res.status(400).json({ error: "Invalid user id" });
       }
 }
+
+export async function getLikedDogs (req, res) {
+  try {
+      const userId = req.params.id;
+      
+      const swipes = await Swipe.find({ userId, liked: true }).select("dogId");
+      const dogIds = await swipes.map(s => s.dogId);
+
+      const dogs = await Dog.find({ _id: { $in: dogIds }});
+
+      res.status(200).json(dogs);
+
+    } catch (err) {
+      res.status(400).json({ error: "Invalid user id" });
+    }
+}
+
 
 export async function addUser (req, res) {
     try {
